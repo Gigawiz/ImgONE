@@ -1,2 +1,5 @@
 # ImgONE
-ImgONE is based off of the official Hyperdesktop2 source code.
+
+ImgONE is the official screenshot tool developed for ImgONE.co
+
+This is built on the HyperDesktop2 source code.
