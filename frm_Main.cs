@@ -15,7 +15,7 @@ namespace ImgONE
 	{
 		Hotkeys hook;
 		Boolean snipper_open;
-				
+        public static String last_ftp_file;
 		#region Main Form
 		public frm_Main()
 		{
@@ -75,6 +75,9 @@ namespace ImgONE
 		{
             Imgur.web_client.UploadProgressChanged += upload_progress_changed;
             Imgur.web_client.UploadValuesCompleted += upload_progress_complete;
+
+            ftp.web_client.UploadProgressChanged += upload_progress_changed;
+            ftp.web_client.UploadDataCompleted += web_client_UploadDataCompleted;
 
 			Settings.get_settings();
 			tray_icon.Visible = true;
@@ -233,7 +236,8 @@ namespace ImgONE
             if (bmp == null)
                 return;
 
-            if (Settings.upload_method == "imgur")
+            if (Settings.upload_method == "Imgur")
+            {
                 if (!Imgur.upload(bmp))
                 {
                     Global_Func.play_sound("error.wav");
@@ -241,6 +245,17 @@ namespace ImgONE
                     if (Settings.balloon_messages)
                         balloon_tip("Error uploading file!", "Error", 2000, ToolTipIcon.Error);
                 }
+            }
+            else if (Settings.upload_method == "FTP Server")
+            {
+                if (!ftp.upload(bmp))
+                {
+                    Global_Func.play_sound("error.wav");
+
+                    if (Settings.balloon_messages)
+                        balloon_tip("Error uploading file!", "Error", 2000, ToolTipIcon.Error);
+                }
+            }
 
             save_screenshot(bmp);
         }
@@ -253,7 +268,11 @@ namespace ImgONE
 			dialog.Filter = "PNG|*.png|JPG|*.jpg|BMP|*.bmp|All Files (*.*)|*.*"; 
 			
 			if(dialog.ShowDialog() == DialogResult.OK) {
-				work_image(new Bitmap(Image.FromFile(dialog.FileName)));
+                if (Settings.upload_method == "FTP Server")
+                {
+                    last_ftp_file = Path.GetFileName(dialog.FileName);
+                }
+				work_image(new Bitmap(Image.FromFile(dialog.FileName)), false);
 			}	
 		} 
 		
@@ -296,20 +315,35 @@ namespace ImgONE
 		{
 			if(list_image_links.SelectedItems.Count <= 0)
 				return;
-			
-			if(Imgur.delete(list_image_links.SelectedItems[0].SubItems[1].Text))
-				list_image_links.SelectedItems[0].Remove();
+            if (Settings.upload_method == "FTP Server")
+            {
+                if(ftp.delete(list_image_links.SelectedItems[0].SubItems[1].Text))
+                    list_image_links.SelectedItems[0].Remove();
+                else
+                {
+                    Global_Func.play_sound("error.wav");
+
+                    if (Settings.balloon_messages)
+                        balloon_tip("Could not delete file!", "Error", 2000, ToolTipIcon.Error);
+                }
+            }
             else
             {
-                Global_Func.play_sound("error.wav");
+                if (Imgur.delete(list_image_links.SelectedItems[0].SubItems[1].Text))
+                    list_image_links.SelectedItems[0].Remove();
+                else
+                {
+                    Global_Func.play_sound("error.wav");
 
-                if (Settings.balloon_messages)
-                    balloon_tip("Could not delete file!", "Error", 2000, ToolTipIcon.Error);
+                    if (Settings.balloon_messages)
+                        balloon_tip("Could not delete file!", "Error", 2000, ToolTipIcon.Error);
+                }
             }
 		}
 		#endregion
 		
 		#region Progress Bar
+
 		void upload_progress_changed(object sender, UploadProgressChangedEventArgs e)
 		{
 			try {
@@ -320,31 +354,48 @@ namespace ImgONE
 				// below .NET 4.0, sometimes it throws an absurd
 				// number into the ProgressPercentage
 			}
-		}		
-		void upload_progress_complete(object sender, UploadValuesCompletedEventArgs e)
-		{
-			group_upload_progress.Text = "Upload Progress";
-			progress.Value = 0;
-			
-			String response = Encoding.UTF8.GetString(e.Result);
-			
-			String delete_hash = Global_Func.get_text_inbetween(response, "deletehash\":\"", "\",\"name\"").Replace("\\", "");
-			String link 		= Global_Func.get_text_inbetween(response, "link\":\"", "\"}").Replace("\\", "");
-			
-			list_image_links.Items.Add(
-				new ListViewItem(new String[] {link, delete_hash})
-			);
-			
-			list_image_links.Items[list_image_links.Items.Count-1].EnsureVisible();
-			
-			if(Settings.copy_links_to_clipboard)
-				Clipboard.SetText(link);
-		
-			if(Settings.balloon_messages)
-				balloon_tip(link, "Upload Complete!", 2000);
-			
-			Global_Func.play_sound("success.wav");
 		}
+        void web_client_UploadDataCompleted(object sender, UploadDataCompletedEventArgs e)
+        {
+            group_upload_progress.Text = "Upload Progress";
+            progress.Value = 0;
+
+            list_image_links.Items.Add(
+                new ListViewItem(new String[] { Settings.ftp_website_url + "/" + last_ftp_file, last_ftp_file})
+            );
+
+            list_image_links.Items[list_image_links.Items.Count - 1].EnsureVisible();
+
+            if (Settings.copy_links_to_clipboard)
+                Clipboard.SetText(Settings.ftp_website_url + "/" + last_ftp_file);
+
+            if (Settings.balloon_messages)
+                balloon_tip(Settings.ftp_website_url + "/" + last_ftp_file, "Upload Complete!", 2000);
+            Global_Func.play_sound("success.wav");
+        }
+        void upload_progress_complete(object sender, UploadValuesCompletedEventArgs e)
+        {
+            group_upload_progress.Text = "Upload Progress";
+            progress.Value = 0;
+
+            String response = Encoding.UTF8.GetString(e.Result);
+
+            String delete_hash = Global_Func.get_text_inbetween(response, "deletehash\":\"", "\",\"name\"").Replace("\\", "");
+            String link = Global_Func.get_text_inbetween(response, "link\":\"", "\"}").Replace("\\", "");
+
+            list_image_links.Items.Add(
+                new ListViewItem(new String[] { link, delete_hash })
+            );
+
+            list_image_links.Items[list_image_links.Items.Count - 1].EnsureVisible();
+
+            if (Settings.copy_links_to_clipboard)
+                Clipboard.SetText(link);
+
+            if (Settings.balloon_messages)
+                balloon_tip(link, "Upload Complete!", 2000);
+            Global_Func.play_sound("success.wav");
+        }
 		#endregion
     }
 }

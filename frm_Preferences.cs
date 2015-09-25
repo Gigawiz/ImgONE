@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.IO;
 
 namespace ImgONE
 {
@@ -20,7 +21,22 @@ namespace ImgONE
 			
 			drop_upload_method.Text 			= Settings.upload_method;
 			drop_upload_format.Text 			= Settings.upload_format;
-			
+
+            if (Settings.upload_method == "FTP Server")
+            {
+                try
+                {
+                    textBox4.Text = Settings.ftp_website_url;
+                    textBox8.Text = Settings.ftp_server;
+                    textBox5.Text = Settings.ftp_username;
+                    textBox6.Text = CryptorEngine.Decrypt(Settings.ftp_password);
+                    textBox7.Text = Settings.ftp_path;
+                }
+                catch
+                {
+                }
+            }
+
 			check_run_at_startup.Checked 		= Global_Func.reg_key.GetValue("Hyperdesktop2") != null;
 			check_copy_links.Checked 			= Settings.copy_links_to_clipboard;
 			check_sound_effects.Checked			= Settings.sound_effects;
@@ -66,6 +82,13 @@ namespace ImgONE
 			
 			Settings.upload_method 				= drop_upload_method.Text;
 			Settings.upload_format 				= drop_upload_format.Text;
+
+            Settings.ftp_website_url = textBox4.Text.TrimEnd(Path.DirectorySeparatorChar);
+            Settings.ftp_server = textBox8.Text;
+            Settings.ftp_username = textBox5.Text;
+            Settings.ftp_password = CryptorEngine.Encrypt(textBox6.Text);
+            Settings.ftp_path = textBox7.Text.TrimEnd(Path.DirectorySeparatorChar);
+
 			
 			Settings.copy_links_to_clipboard 	= check_copy_links.Checked;
 			Settings.sound_effects 				= check_sound_effects.Checked;
@@ -107,5 +130,35 @@ namespace ImgONE
 			numeric_height.Value = Convert.ToDecimal(screen_res[3]);
 		}
 		#endregion
+
+        private void drop_upload_method_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (drop_upload_method.Text == "FTP Server")
+            {
+                label1.Visible = true;
+                label4.Visible = true;
+                label5.Visible = true;
+                label6.Visible = true;
+                label7.Visible = true;
+                textBox4.Visible = true;
+                textBox5.Visible = true;
+                textBox6.Visible = true;
+                textBox7.Visible = true;
+                textBox8.Visible = true;
+            }
+            else
+            {
+                label1.Visible = false;
+                label4.Visible = false;
+                label5.Visible = false;
+                label6.Visible = false;
+                label7.Visible = false;
+                textBox4.Visible = false;
+                textBox5.Visible = false;
+                textBox6.Visible = false;
+                textBox7.Visible = false;
+                textBox8.Visible = false;
+            }
+        }
 	}
 }

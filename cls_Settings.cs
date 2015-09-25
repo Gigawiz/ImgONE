@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.IO;
 
 namespace ImgONE
 {
 	public static class Settings
 	{
-		public static Int32 build = 8;
+		public static Int32 build = 9;
         public static String build_url = "https://raw.githubusercontent.com/Gigawiz/ImgONE/master/BUILD";
         public static String release_url = "https://github.com/Gigawiz/ImgONE/releases";
 		
@@ -50,6 +51,14 @@ namespace ImgONE
 		public static String upload_method;
 		public static String upload_format;
 		
+        //FTP Settings
+        public static String ftp_website_url;
+        public static String ftp_server;
+        public static String ftp_username;
+        public static String ftp_password;
+        public static String ftp_path;
+
+
 		public static Boolean run_at_system_startup;
 		public static Boolean copy_links_to_clipboard;
 		public static Boolean show_cursor;
@@ -75,6 +84,12 @@ namespace ImgONE
 			
 			upload_method 			= Exists("upload", "upload_method", "imgur");
 			upload_format			= Exists("upload", "upload_format", "png");
+
+            ftp_website_url = Exists("FTP", "ftp_website_url", "");
+            ftp_server = Exists("FTP", "ftp_server", "");
+            ftp_username = Exists("FTP", "ftp_username", "");
+            ftp_password = Exists("FTP", "ftp_password", "");
+            ftp_path = Exists("FTP", "ftp_path", "");
 			
 			copy_links_to_clipboard = Global_Func.str_to_bool(Exists("behavior", "copy_links_to_clipboard", "true"));
 			show_cursor 			= Global_Func.str_to_bool(Exists("behavior", "show_cursor", "false"));
@@ -89,7 +104,18 @@ namespace ImgONE
 		public static void write_settings()
 		{
 			Write("upload", 	"imgur_client_id", 			imgur_client_id);
-			
+            Write("upload",     "upload_method",            upload_method);
+
+            if (upload_method == "FTP Server")
+            {
+                Write("ftp", "ftp_website_url", ftp_website_url);
+                Write("ftp", "ftp_server", ftp_server);
+                Write("ftp", "ftp_username", ftp_username);
+                Write("ftp", "ftp_password", ftp_password);
+                Write("ftp", "ftp_path", ftp_path.TrimEnd(Path.DirectorySeparatorChar).TrimEnd(Path.AltDirectorySeparatorChar));
+
+            }
+
 			Write("general", 	"save_screenshots", 		save_screenshots.ToString());
 			Write("general", 	"save_folder", 				save_folder);
 			Write("general", 	"save_format", 				save_format);

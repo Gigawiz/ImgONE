@@ -51,9 +51,9 @@ namespace ImgONE
 			app_data_folder_create();
 			
 			if(run)
-				reg_key.SetValue("Hyperdesktop2", Settings.exe_path);
+				reg_key.SetValue("ImgONE", Settings.exe_path);
 			else
-				reg_key.DeleteValue("Hyperdesktop2", false);
+				reg_key.DeleteValue("ImgONE", false);
 		}
 		
 		public static void app_data_folder_create() {

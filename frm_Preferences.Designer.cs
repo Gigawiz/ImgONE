@@ -88,6 +88,16 @@ namespace ImgONE
             this.label_screen_x = new System.Windows.Forms.Label();
             this.btn_save = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBox8 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tab_general.SuspendLayout();
             this.tab_behavior.SuspendLayout();
@@ -102,9 +112,9 @@ namespace ImgONE
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tab_general);
             this.tabControl1.Controls.Add(this.tab_behavior);
             this.tabControl1.Controls.Add(this.tab_uploading);
@@ -201,8 +211,8 @@ namespace ImgONE
             // 
             // txt_save_folder
             // 
-            this.txt_save_folder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txt_save_folder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_save_folder.Location = new System.Drawing.Point(8, 31);
             this.txt_save_folder.Name = "txt_save_folder";
             this.txt_save_folder.Size = new System.Drawing.Size(254, 20);
@@ -308,6 +318,16 @@ namespace ImgONE
             // 
             // tab_uploading
             // 
+            this.tab_uploading.Controls.Add(this.label7);
+            this.tab_uploading.Controls.Add(this.textBox8);
+            this.tab_uploading.Controls.Add(this.label6);
+            this.tab_uploading.Controls.Add(this.textBox7);
+            this.tab_uploading.Controls.Add(this.label5);
+            this.tab_uploading.Controls.Add(this.textBox6);
+            this.tab_uploading.Controls.Add(this.label4);
+            this.tab_uploading.Controls.Add(this.textBox5);
+            this.tab_uploading.Controls.Add(this.label1);
+            this.tab_uploading.Controls.Add(this.textBox4);
             this.tab_uploading.Controls.Add(this.drop_upload_method);
             this.tab_uploading.Controls.Add(this.label_upload_method);
             this.tab_uploading.Controls.Add(this.drop_upload_format);
@@ -326,16 +346,18 @@ namespace ImgONE
             this.drop_upload_method.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.drop_upload_method.FormattingEnabled = true;
             this.drop_upload_method.Items.AddRange(new object[] {
-            "do not upload",
-            "imgur"});
-            this.drop_upload_method.Location = new System.Drawing.Point(64, 6);
+            "Do Not Upload",
+            "Imgur",
+            "FTP Server"});
+            this.drop_upload_method.Location = new System.Drawing.Point(94, 6);
             this.drop_upload_method.Name = "drop_upload_method";
             this.drop_upload_method.Size = new System.Drawing.Size(121, 21);
             this.drop_upload_method.TabIndex = 8;
+            this.drop_upload_method.SelectedIndexChanged += new System.EventHandler(this.drop_upload_method_SelectedIndexChanged);
             // 
             // label_upload_method
             // 
-            this.label_upload_method.Location = new System.Drawing.Point(8, 4);
+            this.label_upload_method.Location = new System.Drawing.Point(38, 4);
             this.label_upload_method.Name = "label_upload_method";
             this.label_upload_method.Size = new System.Drawing.Size(50, 23);
             this.label_upload_method.TabIndex = 7;
@@ -351,14 +373,14 @@ namespace ImgONE
             "bmp",
             "png",
             "jpg"});
-            this.drop_upload_format.Location = new System.Drawing.Point(64, 33);
+            this.drop_upload_format.Location = new System.Drawing.Point(94, 33);
             this.drop_upload_format.Name = "drop_upload_format";
             this.drop_upload_format.Size = new System.Drawing.Size(121, 21);
             this.drop_upload_format.TabIndex = 6;
             // 
             // label_update_format
             // 
-            this.label_update_format.Location = new System.Drawing.Point(8, 31);
+            this.label_update_format.Location = new System.Drawing.Point(38, 31);
             this.label_update_format.Name = "label_update_format";
             this.label_update_format.Size = new System.Drawing.Size(50, 23);
             this.label_update_format.TabIndex = 5;
@@ -755,6 +777,97 @@ namespace ImgONE
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.Btn_cancelClick);
             // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(94, 57);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(200, 20);
+            this.textBox4.TabIndex = 9;
+            this.textBox4.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(8, 54);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 23);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Website URL:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label1.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(8, 100);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(80, 23);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Username:";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label4.Visible = false;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(94, 103);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(121, 20);
+            this.textBox5.TabIndex = 11;
+            this.textBox5.Visible = false;
+            // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(8, 123);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(80, 23);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Password:";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label5.Visible = false;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(94, 126);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.PasswordChar = '*';
+            this.textBox6.Size = new System.Drawing.Size(121, 20);
+            this.textBox6.TabIndex = 13;
+            this.textBox6.Visible = false;
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(8, 146);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(80, 23);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "Remote Path:";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label6.Visible = false;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(94, 149);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(200, 20);
+            this.textBox7.TabIndex = 15;
+            this.textBox7.Visible = false;
+            // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(8, 77);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(80, 23);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "FTP Server:";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label7.Visible = false;
+            // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(94, 80);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(200, 20);
+            this.textBox8.TabIndex = 17;
+            this.textBox8.Visible = false;
+            // 
             // frm_Preferences
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -775,6 +888,7 @@ namespace ImgONE
             this.tab_general.PerformLayout();
             this.tab_behavior.ResumeLayout(false);
             this.tab_uploading.ResumeLayout(false);
+            this.tab_uploading.PerformLayout();
             this.tab_hotkeys.ResumeLayout(false);
             this.tab_hotkeys.PerformLayout();
             this.tab_screens.ResumeLayout(false);
@@ -836,5 +950,15 @@ namespace ImgONE
 		private System.Windows.Forms.TabPage tab_general;
 		private System.Windows.Forms.TabPage tab_behavior;
 		private System.Windows.Forms.TabPage tab_uploading;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBox8;
 	}
 }

@@ -41,9 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="cls_CryptorEngine.cs" />
+    <Compile Include="ImageHosts\cls_FTP.cs" />
     <Compile Include="cls_Global_Func.cs" />
     <Compile Include="cls_Hotkeys.cs" />
-    <Compile Include="cls_Imgur.cs" />
+    <Compile Include="ImageHosts\cls_ImgONE.cs" />
+    <Compile Include="ImageHosts\cls_Imgur.cs" />
     <Compile Include="cls_Screen_Bounds.cs" />
     <Compile Include="cls_Screen_Capture.cs" />
     <Compile Include="cls_Settings.cs" />
