@@ -100,7 +100,7 @@ namespace ImgONE
                 e.Graphics.DrawRectangle(pen, select.X, select.Y, select.Width - 1, select.Height - 1);
             }
         }
-
+        string lstkey = "";
         protected override bool ProcessCmdKey(ref Message msg, Keys key)
         {
             if (key == Keys.Escape)

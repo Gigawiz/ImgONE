@@ -15,15 +15,15 @@ namespace ImgONE
 		}
 		void Btn_githubClick(object sender, System.EventArgs e)
 		{
-            Process.Start("https://github.com/Gigawiz/ImgONE");
+            Process.Start("http://imgone.co");
 		}
 		void Btn_reportClick(object sender, System.EventArgs e)
 		{
-            Process.Start("https://github.com/Gigawiz/ImgONE/issues");
+            Process.Start("http://webmasterone.com/");
 		}
 		void Frm_AboutLoad(object sender, System.EventArgs e)
 		{
-			label_build.Text = "Build: " + Settings.build;
+			label_build.Text = "Build: " + Settings.newbuild;
 		}
 	}
 }

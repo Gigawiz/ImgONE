@@ -35,8 +35,9 @@ namespace ImgONE
 			Global_Func.app_data_folder_create();
 			Global_Func.copy_files();
 			
-			var web_client = new WebClient();
-			Int32 build = Convert.ToInt32(web_client.DownloadString(Settings.build_url));
+            /*Old Update callbacks to github server. Throws false positives on some AV's (discovered while scanning with virustotal)*/
+			//var web_client = new WebClient();
+			//Int32 build = Convert.ToInt32(web_client.DownloadString(Settings.build_url));
 			
 			// Confirm if user wants to add to system startup
 			// on first run
@@ -52,6 +53,7 @@ namespace ImgONE
 				if(result == DialogResult.Yes)
 					Global_Func.run_at_startup(true);
 			}
+                /*
 			// Update notification
 			else if(build > Settings.build) {
 				DialogResult result = MessageBox.Show(
@@ -66,18 +68,24 @@ namespace ImgONE
 					Process.Start(Settings.release_url);
 					Process.GetCurrentProcess().Kill();
 				}
-			}
+			}*/
 			
 			register_hotkeys();
 		}
 		
 		void Frm_MainLoad(object sender, EventArgs e)
 		{
+            ImgONE.web_client.UploadProgressChanged += upload_progress_changed;
+            ImgONE.web_client.UploadValuesCompleted += upload_progress_imgone_complete;
+
             Imgur.web_client.UploadProgressChanged += upload_progress_changed;
             Imgur.web_client.UploadValuesCompleted += upload_progress_complete;
 
             ftp.web_client.UploadProgressChanged += upload_progress_changed;
             ftp.web_client.UploadDataCompleted += web_client_UploadDataCompleted;
+
+            Updates.web_client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(web_client_DownloadProgressChanged);
+            Updates.web_client.DownloadFileCompleted += new AsyncCompletedEventHandler(web_client_DownloadFileCompleted);
 
 			Settings.get_settings();
 			tray_icon.Visible = true;
@@ -216,8 +224,12 @@ namespace ImgONE
                     snipper_open = true;
                     var rect = frm_Snipper.get_region();
 
-                    if(rect == new Rectangle(0, 0, 0, 0))
+                    if (rect == new Rectangle(0, 0, 0, 0))
+                    {
+                        //pressing esc in screen region snipper would cause it to crash. adding this line fixed it.
+                        snipper_open = false;
                         return;
+                    }
 
                     bmp = Screen_Capture.region(rect);
                     snipper_open = false;
@@ -256,7 +268,16 @@ namespace ImgONE
                         balloon_tip("Error uploading file!", "Error", 2000, ToolTipIcon.Error);
                 }
             }
+            else if (Settings.upload_method == "ImgONE")
+            {
+                if (!ImgONE.upload(bmp))
+                {
+                    Global_Func.play_sound("error.wav");
 
+                    if (Settings.balloon_messages)
+                        balloon_tip("Error uploading file!", "Error", 2000, ToolTipIcon.Error);
+                }
+            }
             save_screenshot(bmp);
         }
         #endregion
@@ -264,6 +285,7 @@ namespace ImgONE
         #region Buttons
         void Btn_browseClick(object sender, EventArgs e)
 		{
+            //Updates.downloadUpdates();
 			var dialog = new OpenFileDialog();
 			dialog.Filter = "PNG|*.png|JPG|*.jpg|BMP|*.bmp|All Files (*.*)|*.*"; 
 			
@@ -273,7 +295,7 @@ namespace ImgONE
                     last_ftp_file = Path.GetFileName(dialog.FileName);
                 }
 				work_image(new Bitmap(Image.FromFile(dialog.FileName)), false);
-			}	
+			}
 		} 
 		
 		void Btn_captureClick(object sender, EventArgs e) 			{ screen_capture("screen"); }
@@ -321,7 +343,21 @@ namespace ImgONE
                     list_image_links.SelectedItems[0].Remove();
                 else
                 {
-                    Global_Func.play_sound("error.wav");
+                    if (Settings.sound_effects)
+                        Global_Func.play_sound("error.wav");
+
+                    if (Settings.balloon_messages)
+                        balloon_tip("Could not delete file!", "Error", 2000, ToolTipIcon.Error);
+                }
+            }
+            else if (Settings.upload_method == "ImgONE")
+            {
+                if (ImgONE.delete(list_image_links.SelectedItems[0].SubItems[1].Text))
+                    list_image_links.SelectedItems[0].Remove();
+                else
+                {
+                    if (Settings.sound_effects)
+                        Global_Func.play_sound("error.wav");
 
                     if (Settings.balloon_messages)
                         balloon_tip("Could not delete file!", "Error", 2000, ToolTipIcon.Error);
@@ -333,7 +369,8 @@ namespace ImgONE
                     list_image_links.SelectedItems[0].Remove();
                 else
                 {
-                    Global_Func.play_sound("error.wav");
+                    if (Settings.sound_effects)
+                        Global_Func.play_sound("error.wav");
 
                     if (Settings.balloon_messages)
                         balloon_tip("Could not delete file!", "Error", 2000, ToolTipIcon.Error);
@@ -343,6 +380,31 @@ namespace ImgONE
 		#endregion
 		
 		#region Progress Bar
+
+        void web_client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            group_upload_progress.Text = "Upload Progress";
+            progress.Value = 0;
+            //need to verify that update downloaded
+            
+            //Process.Start("updater.exe");
+            //Environment.Exit(0);
+        }
+
+        void web_client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            try
+            {
+                Int32 percent = Convert.ToInt32(e.BytesReceived / e.TotalBytesToReceive) * 100;
+                group_upload_progress.Text = String.Format("Update Download Progress - {0}% ({1}kb/{2}kb)", percent, e.BytesReceived / 1024, e.TotalBytesToReceive / 1024);
+                progress.Value = percent;
+            }
+            catch
+            {
+                // below .NET 4.0, sometimes it throws an absurd
+                // number into the ProgressPercentage
+            }
+        }
 
 		void upload_progress_changed(object sender, UploadProgressChangedEventArgs e)
 		{
@@ -371,8 +433,38 @@ namespace ImgONE
 
             if (Settings.balloon_messages)
                 balloon_tip(Settings.ftp_website_url + "/" + last_ftp_file, "Upload Complete!", 2000);
-            Global_Func.play_sound("success.wav");
+            if (Settings.sound_effects)
+                Global_Func.play_sound("success.wav");
         }
+
+        void upload_progress_imgone_complete(object sender, UploadValuesCompletedEventArgs e)
+        {
+            group_upload_progress.Text = "Upload Progress";
+            progress.Value = 0;
+
+            String response = Encoding.UTF8.GetString(e.Result);
+            
+            String link = response;
+            string strip = response.Substring(response.LastIndexOf("/") + 1);
+            strip = strip.Remove(strip.LastIndexOf("."));
+            String delete_hash = strip;
+
+
+            list_image_links.Items.Add(
+                new ListViewItem(new String[] { link, delete_hash })
+            );
+
+            list_image_links.Items[list_image_links.Items.Count - 1].EnsureVisible();
+
+            if (Settings.copy_links_to_clipboard)
+                Clipboard.SetText(link);
+
+            if (Settings.balloon_messages)
+                balloon_tip(link, "Upload Complete!", 2000);
+            if (Settings.sound_effects)
+                Global_Func.play_sound("success.wav");
+        }
+
         void upload_progress_complete(object sender, UploadValuesCompletedEventArgs e)
         {
             group_upload_progress.Text = "Upload Progress";
@@ -394,7 +486,8 @@ namespace ImgONE
 
             if (Settings.balloon_messages)
                 balloon_tip(link, "Upload Complete!", 2000);
-            Global_Func.play_sound("success.wav");
+            if (Settings.sound_effects)
+                Global_Func.play_sound("success.wav");
         }
 		#endregion
     }

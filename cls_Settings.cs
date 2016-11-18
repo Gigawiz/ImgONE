@@ -2,14 +2,16 @@
 using System.Runtime.InteropServices;
 using System.Text;
 using System.IO;
+using System.Windows.Forms;
 
 namespace ImgONE
 {
 	public static class Settings
 	{
-		public static Int32 build = 9;
-        public static String build_url = "https://raw.githubusercontent.com/Gigawiz/ImgONE/master/BUILD";
-        public static String release_url = "https://github.com/Gigawiz/ImgONE/releases";
+        public static String newbuild = Application.ProductVersion;
+		public static Int32 build = 10;
+        public static String build_url = "https://jenkins.rawrfuls.com/job/ImgONE/lastSuccessfulBuild/artifact/BUILD";
+        public static String release_url = "https://jenkins.rawrfuls.com/job/ImgONE/lastSuccessfulBuild/artifact/bin/Release/ImgONE.exe";
 		
 		public static String app_data = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\ImgONE\";
 		public static String exe_path = app_data + @"ImgONE.exe";
@@ -42,7 +44,9 @@ namespace ImgONE
 		public static String settings_build;
 		
 		public static String imgur_client_id;
-		
+
+        public static String ImgONE_client_id;
+
 		public static Boolean save_screenshots;
 		public static String save_folder;
 		public static String save_format;
@@ -76,13 +80,14 @@ namespace ImgONE
 			settings_build			= Exists("ImgONE", "build", Convert.ToString(build));
 
             imgur_client_id = Exists("upload", "imgur_client_id", "7e73b6f6a7a5913");
-				
+            ImgONE_client_id = Exists("upload", "ImgONE_client_id", "83333bb9febb0b074fa02c374e7ad9e2");
+
 			save_screenshots		= Global_Func.str_to_bool(Exists("general", "save_screenshots", "false"));
 			save_folder				= Exists("general", "save_folder", Environment.CurrentDirectory + "\\captures\\");
 			save_format 			= Exists("general", "save_format", "png");
 			save_quality 			= Convert.ToInt16(Exists("general", "save_quality", "100"));
 			
-			upload_method 			= Exists("upload", "upload_method", "imgur");
+			upload_method 			= Exists("upload", "upload_method", "ImgONE");
 			upload_format			= Exists("upload", "upload_format", "png");
 
             ftp_website_url = Exists("FTP", "ftp_website_url", "");
@@ -93,7 +98,7 @@ namespace ImgONE
 			
 			copy_links_to_clipboard = Global_Func.str_to_bool(Exists("behavior", "copy_links_to_clipboard", "true"));
 			show_cursor 			= Global_Func.str_to_bool(Exists("behavior", "show_cursor", "false"));
-			sound_effects 			= Global_Func.str_to_bool(Exists("behavior", "sound_effects", "true"));
+			sound_effects 			= Global_Func.str_to_bool(Exists("behavior", "sound_effects", "false"));
 			balloon_messages 		= Global_Func.str_to_bool(Exists("behavior", "balloon_messages", "true"));
 			launch_browser 			= Global_Func.str_to_bool(Exists("behavior", "launch_browser", "false"));
 			edit_screenshot 		= Global_Func.str_to_bool(Exists("behavior", "edit_screenshot", "true"));
@@ -104,6 +109,7 @@ namespace ImgONE
 		public static void write_settings()
 		{
 			Write("upload", 	"imgur_client_id", 			imgur_client_id);
+            Write("upload", "ImgONE_client_id", ImgONE_client_id);
             Write("upload",     "upload_method",            upload_method);
 
             if (upload_method == "FTP Server")

@@ -55,11 +55,23 @@ namespace ImgONE
             this.check_copy_links = new System.Windows.Forms.CheckBox();
             this.check_run_at_startup = new System.Windows.Forms.CheckBox();
             this.tab_uploading = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.drop_upload_method = new System.Windows.Forms.ComboBox();
             this.label_upload_method = new System.Windows.Forms.Label();
             this.drop_upload_format = new System.Windows.Forms.ComboBox();
             this.label_update_format = new System.Windows.Forms.Label();
             this.tab_hotkeys = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label_window_screenshot = new System.Windows.Forms.Label();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
@@ -88,16 +100,6 @@ namespace ImgONE
             this.label_screen_x = new System.Windows.Forms.Label();
             this.btn_save = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tab_general.SuspendLayout();
             this.tab_behavior.SuspendLayout();
@@ -340,6 +342,97 @@ namespace ImgONE
             this.tab_uploading.Text = "Uploading";
             this.tab_uploading.UseVisualStyleBackColor = true;
             // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(8, 77);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(80, 23);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "FTP Server:";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label7.Visible = false;
+            // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(94, 80);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(200, 20);
+            this.textBox8.TabIndex = 17;
+            this.textBox8.Visible = false;
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(8, 146);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(80, 23);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "Remote Path:";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label6.Visible = false;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(94, 149);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(200, 20);
+            this.textBox7.TabIndex = 15;
+            this.textBox7.Visible = false;
+            // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(8, 123);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(80, 23);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Password:";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label5.Visible = false;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(94, 126);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.PasswordChar = '*';
+            this.textBox6.Size = new System.Drawing.Size(121, 20);
+            this.textBox6.TabIndex = 13;
+            this.textBox6.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(8, 100);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(80, 23);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Username:";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label4.Visible = false;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(94, 103);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(121, 20);
+            this.textBox5.TabIndex = 11;
+            this.textBox5.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(8, 54);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 23);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Website URL:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label1.Visible = false;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(94, 57);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(200, 20);
+            this.textBox4.TabIndex = 9;
+            this.textBox4.Visible = false;
+            // 
             // drop_upload_method
             // 
             this.drop_upload_method.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -347,6 +440,7 @@ namespace ImgONE
             this.drop_upload_method.FormattingEnabled = true;
             this.drop_upload_method.Items.AddRange(new object[] {
             "Do Not Upload",
+            "ImgONE",
             "Imgur",
             "FTP Server"});
             this.drop_upload_method.Location = new System.Drawing.Point(94, 6);
@@ -389,6 +483,8 @@ namespace ImgONE
             // 
             // tab_hotkeys
             // 
+            this.tab_hotkeys.Controls.Add(this.label9);
+            this.tab_hotkeys.Controls.Add(this.label8);
             this.tab_hotkeys.Controls.Add(this.textBox3);
             this.tab_hotkeys.Controls.Add(this.label_window_screenshot);
             this.tab_hotkeys.Controls.Add(this.checkBox6);
@@ -413,9 +509,29 @@ namespace ImgONE
             this.tab_hotkeys.Text = "Hotkeys";
             this.tab_hotkeys.UseVisualStyleBackColor = true;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.Maroon;
+            this.label9.Location = new System.Drawing.Point(9, 145);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(312, 26);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "The Hotkeys listed above are the keys you will need to use for a \r\nscreenshot";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.Color.DarkRed;
+            this.label8.Location = new System.Drawing.Point(9, 132);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(321, 13);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "Please note that at this time, this tab is for reference purposes only.";
+            // 
             // textBox3
             // 
-            this.textBox3.Enabled = false;
             this.textBox3.Location = new System.Drawing.Point(300, 95);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
@@ -457,6 +573,7 @@ namespace ImgONE
             this.checkBox7.TabIndex = 12;
             this.checkBox7.Text = "Alt";
             this.checkBox7.UseVisualStyleBackColor = true;
+            this.checkBox7.Visible = false;
             // 
             // checkBox8
             // 
@@ -474,7 +591,6 @@ namespace ImgONE
             // 
             // textBox2
             // 
-            this.textBox2.Enabled = false;
             this.textBox2.Location = new System.Drawing.Point(300, 65);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
@@ -516,6 +632,7 @@ namespace ImgONE
             this.checkBox4.TabIndex = 7;
             this.checkBox4.Text = "Alt";
             this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.Visible = false;
             // 
             // checkBox5
             // 
@@ -533,7 +650,6 @@ namespace ImgONE
             // 
             // textBox1
             // 
-            this.textBox1.Enabled = false;
             this.textBox1.Location = new System.Drawing.Point(300, 35);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
@@ -575,6 +691,7 @@ namespace ImgONE
             this.checkBox1.TabIndex = 2;
             this.checkBox1.Text = "Alt";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.Visible = false;
             // 
             // check_screenshot_ctrl
             // 
@@ -777,97 +894,6 @@ namespace ImgONE
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.Btn_cancelClick);
             // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(94, 57);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(200, 20);
-            this.textBox4.TabIndex = 9;
-            this.textBox4.Visible = false;
-            // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(8, 54);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 23);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Website URL:";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label1.Visible = false;
-            // 
-            // label4
-            // 
-            this.label4.Location = new System.Drawing.Point(8, 100);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(80, 23);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Username:";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label4.Visible = false;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(94, 103);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(121, 20);
-            this.textBox5.TabIndex = 11;
-            this.textBox5.Visible = false;
-            // 
-            // label5
-            // 
-            this.label5.Location = new System.Drawing.Point(8, 123);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(80, 23);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "Password:";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label5.Visible = false;
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(94, 126);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.PasswordChar = '*';
-            this.textBox6.Size = new System.Drawing.Size(121, 20);
-            this.textBox6.TabIndex = 13;
-            this.textBox6.Visible = false;
-            // 
-            // label6
-            // 
-            this.label6.Location = new System.Drawing.Point(8, 146);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(80, 23);
-            this.label6.TabIndex = 16;
-            this.label6.Text = "Remote Path:";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label6.Visible = false;
-            // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(94, 149);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(200, 20);
-            this.textBox7.TabIndex = 15;
-            this.textBox7.Visible = false;
-            // 
-            // label7
-            // 
-            this.label7.Location = new System.Drawing.Point(8, 77);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(80, 23);
-            this.label7.TabIndex = 18;
-            this.label7.Text = "FTP Server:";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label7.Visible = false;
-            // 
-            // textBox8
-            // 
-            this.textBox8.Location = new System.Drawing.Point(94, 80);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(200, 20);
-            this.textBox8.TabIndex = 17;
-            this.textBox8.Visible = false;
-            // 
             // frm_Preferences
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -960,5 +986,7 @@ namespace ImgONE
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
 	}
 }

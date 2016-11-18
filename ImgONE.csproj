@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="cls_CryptorEngine.cs" />
+    <Compile Include="cls_Updates.cs" />
     <Compile Include="ImageHosts\cls_FTP.cs" />
     <Compile Include="cls_Global_Func.cs" />
     <Compile Include="cls_Hotkeys.cs" />
@@ -83,6 +84,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="icon-16.ico" />
@@ -105,6 +111,16 @@
     <EmbeddedResource Include="frm_Snipper.resx">
       <DependentUpon>frm_Snipper.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imgone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imgone1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

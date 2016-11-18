@@ -14,8 +14,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ImgONE.co")]
 [assembly: AssemblyProduct("ImgONE")]
-[assembly: AssemblyCopyright("Copyright 2015")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright ImgONE 2015")]
+[assembly: AssemblyTrademark("ImgONE")]
 [assembly: AssemblyCulture("")]
 
 // This sets the default COM visibility of types in the assembly to invisible.
@@ -28,4 +28,5 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can use the default the Revision and 
 // Build Numbers by using the '*' as shown below:
-[assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("1.10.2")]
+[assembly: AssemblyFileVersionAttribute("1.10.2")]

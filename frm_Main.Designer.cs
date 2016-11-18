@@ -153,6 +153,7 @@ namespace ImgONE
             this.registerHotkeysToolStripMenuItem.Name = "registerHotkeysToolStripMenuItem";
             this.registerHotkeysToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.registerHotkeysToolStripMenuItem.Text = "Register Hotkeys";
+            this.registerHotkeysToolStripMenuItem.Visible = false;
             this.registerHotkeysToolStripMenuItem.Click += new System.EventHandler(this.RegisterHotkeysToolStripMenuItemClick);
             // 
             // group_upload
@@ -287,7 +288,7 @@ namespace ImgONE
             // column_url
             // 
             this.column_url.Text = "Image URL";
-            this.column_url.Width = 150;
+            this.column_url.Width = 167;
             // 
             // column_delete_hash
             // 

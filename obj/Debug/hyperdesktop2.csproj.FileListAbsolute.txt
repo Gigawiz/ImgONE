@@ -1,0 +1,13 @@
+D:\Files from Old Windows Installs\laptop files\documents\GitHub\Hyperdesktop2\obj\Debug\hyperdesktop2.csproj.GenerateResource.Cache
+D:\Files from Old Windows Installs\laptop files\documents\GitHub\Hyperdesktop2\bin\Debug\ImgONE.exe.config
+D:\Files from Old Windows Installs\laptop files\documents\GitHub\Hyperdesktop2\bin\Debug\ImgONE.exe
+D:\Files from Old Windows Installs\laptop files\documents\GitHub\Hyperdesktop2\bin\Debug\ImgONE.pdb
+D:\Files from Old Windows Installs\laptop files\documents\GitHub\Hyperdesktop2\obj\Debug\ImgONE.exe
+D:\Files from Old Windows Installs\laptop files\documents\GitHub\Hyperdesktop2\obj\Debug\ImgONE.pdb
+D:\Files from Old Windows Installs\laptop files\documents\GitHub\Hyperdesktop2\obj\Debug\hyperdesktop2.csprojResolveAssemblyReference.cache
+D:\Files from Old Windows Installs\laptop files\documents\GitHub\Hyperdesktop2\obj\Debug\ImgONE.frm_About.resources
+D:\Files from Old Windows Installs\laptop files\documents\GitHub\Hyperdesktop2\obj\Debug\ImgONE.frm_Edit.resources
+D:\Files from Old Windows Installs\laptop files\documents\GitHub\Hyperdesktop2\obj\Debug\ImgONE.frm_Main.resources
+D:\Files from Old Windows Installs\laptop files\documents\GitHub\Hyperdesktop2\obj\Debug\ImgONE.frm_Preferences.resources
+D:\Files from Old Windows Installs\laptop files\documents\GitHub\Hyperdesktop2\obj\Debug\ImgONE.frm_Snipper.resources
+D:\Files from Old Windows Installs\laptop files\documents\GitHub\Hyperdesktop2\obj\Debug\ImgONE.frm_Updates.resources
